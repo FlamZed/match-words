@@ -3,6 +3,8 @@ using Feature.PrintMachine;
 using Infrastructure.AppStateMachine.Interfaces;
 using Infrastructure.GameManager;
 using Infrastructure.Progress;
+using Infrastructure.Services.Audio;
+using Infrastructure.Services.Audio.Type;
 
 namespace Infrastructure.AppStateMachine.States
 {
@@ -15,6 +17,7 @@ namespace Infrastructure.AppStateMachine.States
         private readonly ILoadingCurtain _curtain;
         private readonly IGameManager _gameManager;
         private readonly IGameProgressService _progressService;
+        private readonly IAudioService _audioService;
 
         private string _levelName;
 
@@ -23,8 +26,10 @@ namespace Infrastructure.AppStateMachine.States
             ISceneLoader sceneLoader,
             ILoadingCurtain curtain,
             IGameManager gameManager,
-            IGameProgressService progressService)
+            IGameProgressService progressService,
+            IAudioService audioService)
         {
+            _audioService = audioService;
             _progressService = progressService;
             _gameManager = gameManager;
             _stateMachineMover = stateMachineMover;
@@ -36,6 +41,8 @@ namespace Infrastructure.AppStateMachine.States
         {
             _levelName = levelName;
             _curtain.Show();
+
+            _audioService.PlayBackground(BackgroundClip.Game);
 
             _sceneLoader.Load(SceneName, onLoaded: OnLoaded);
         }

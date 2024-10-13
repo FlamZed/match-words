@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Infrastructure.Services.Audio;
+using Infrastructure.Services.Audio.Type;
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 namespace Feature.PrintMachine.View
 {
@@ -17,11 +20,17 @@ namespace Feature.PrintMachine.View
         [Space]
         [SerializeField] private TMP_Text _printedWordText;
 
+        private IAudioService _audioService;
+
         public event Action<string> OnPrintWordUpdated = delegate { };
 
         private readonly StringBuilder _printedWord = new();
 
         private readonly List<MachinePrintButton> _usedMachineButtons = new();
+
+        [Inject]
+        private void Construct(IAudioService audioService) =>
+            _audioService = audioService;
 
         private void Start()
         {
@@ -33,6 +42,9 @@ namespace Feature.PrintMachine.View
         {
             clearPrintButton.OnClicked -= RestoreButtons;
             removeCharPrintButton.OnClicked -= OnRemoveLetterPrintButtonClicked;
+
+            for (int i = 0; i < _machineButtons.Count; i++)
+                _machineButtons[i].OnLetterSelected -= PrintWord;
         }
 
         public void Initialize(string word)
@@ -52,6 +64,8 @@ namespace Feature.PrintMachine.View
 
         private void PrintWord(MachinePrintButton button)
         {
+            _audioService.PlayOneShot(AudioClipShot.Kick);
+
             _usedMachineButtons.Add(button);
 
             _printedWord.Append(button.Letter);
@@ -62,6 +76,8 @@ namespace Feature.PrintMachine.View
 
         private void OnRemoveLetterPrintButtonClicked()
         {
+            _audioService.PlayOneShot(AudioClipShot.Kick);
+
             if (_printedWord.Length == 0)
                 return;
 
@@ -74,6 +90,8 @@ namespace Feature.PrintMachine.View
 
         public void RestoreButtons()
         {
+            _audioService.PlayOneShot(AudioClipShot.Kick);
+
             _printedWord.Clear();
             _printedWordText.text = string.Empty;
 

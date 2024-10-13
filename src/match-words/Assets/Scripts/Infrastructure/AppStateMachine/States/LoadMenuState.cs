@@ -1,5 +1,7 @@
 ﻿using Feature.LoadingCurtain;
 using Infrastructure.AppStateMachine.Interfaces;
+using Infrastructure.Services.Audio;
+using Infrastructure.Services.Audio.Type;
 
 namespace Infrastructure.AppStateMachine.States
 {
@@ -10,12 +12,15 @@ namespace Infrastructure.AppStateMachine.States
         private readonly IStateMachineMover _stateMachineMover;
         private readonly ISceneLoader _sceneLoader;
         private readonly ILoadingCurtain _curtain;
+        private readonly IAudioService _audioService;
 
         public LoadMenuState(
             IStateMachineMover stateMachineMover,
             ISceneLoader sceneLoader,
-            ILoadingCurtain curtain)
+            ILoadingCurtain curtain,
+            IAudioService audioService)
         {
+            _audioService = audioService;
             _curtain = curtain;
             _sceneLoader = sceneLoader;
             _stateMachineMover = stateMachineMover;
@@ -25,6 +30,8 @@ namespace Infrastructure.AppStateMachine.States
         {
             _curtain.Show();
             _sceneLoader.Load(SceneName, onLoaded: OnLoaded);
+
+            _audioService.PlayBackground(BackgroundClip.Menu);
         }
 
         private void OnLoaded() => _stateMachineMover.Enter<MainMenuState>();
