@@ -8,6 +8,7 @@ using Infrastructure.GameManager.Behaviour;
 using Infrastructure.Progress.Data;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Feature.PrintMachine
 {
@@ -27,10 +28,27 @@ namespace Feature.PrintMachine
         [Space, Header("Timer")]
         [SerializeField] private TMP_Text _totalTimeText;
 
+        [Space]
+        [SerializeField] private Button _exitButton;
+
         private List<DictionaryEntry> _wordsList = new();
 
         public event Action<DictionaryEntry> OnWordCompleted = delegate { };
         public event Action OnLeaveButtonPressed = delegate { };
+
+        protected override void Start()
+        {
+            base.Start();
+
+            _exitButton.onClick.AddListener(ReturnToMenu);
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+
+            _printMachineView.OnPrintWordUpdated -= TryToUnlockWord;
+        }
 
         public void Initialize(string levelName, LevelProgress selectedLevel)
         {
@@ -71,5 +89,7 @@ namespace Feature.PrintMachine
                 OnWordCompleted?.Invoke(wordView);
             }
         }
+
+        private void ReturnToMenu() => OnLeaveButtonPressed?.Invoke();
     }
 }
