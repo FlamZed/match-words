@@ -14,8 +14,9 @@ namespace Infrastructure.DIContainer.Extensions
                 .AsSingle()
                 .NonLazy();
         }
+
         public static void BindService<TService, TRealisation>(this DiContainer diContainer,
-            GameObject gameObject)
+            Object gameObject)
             where TRealisation : TService
         {
             diContainer

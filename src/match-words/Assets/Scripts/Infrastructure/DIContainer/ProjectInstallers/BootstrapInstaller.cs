@@ -1,11 +1,13 @@
-﻿using Infrastructure.AssetManagement;
+﻿using Feature.LoadingCurtain;
+using Infrastructure.AppStateMachine;
+using Infrastructure.AppStateMachine.States;
+using Infrastructure.AssetManagement;
+using Infrastructure.Data;
 using Infrastructure.DIContainer.Extensions;
+using Infrastructure.Progress;
+using Infrastructure.Serialization;
 using Infrastructure.Services.Audio;
-using Infrastructure.Services.Input;
-using Infrastructure.Services.Level;
-using Infrastructure.Services.Menu;
-using Infrastructure.States;
-using Logic.Loading;
+using Infrastructure.View.Factory;
 using UnityEngine;
 using Zenject;
 
@@ -16,35 +18,68 @@ namespace Infrastructure.DIContainer.ProjectInstallers
         [SerializeField] private GameObject _curtainPrefab;
         [SerializeField] private GameObject _coroutineRunner;
         [SerializeField] private GameObject _audioService;
-        [SerializeField] private GameObject _inputService;
+
+        [Space]
+        [SerializeField] private Canvas _popupCanvas;
 
         public override void InstallBindings()
         {
-            Container.BindInterfacesTo<BootstrapInstaller>().FromInstance(this).AsSingle().NonLazy();
+            BindCurtain();
+            BindServices();
+            BindView();
+            BindStateMachine();
+        }
 
-            Container.BindService<ICoroutineRunner, CoroutineRunner>(_coroutineRunner);
+        private void BindCurtain()
+        {
             Container.BindService<ILoadingCurtain, LoadingCurtain>(_curtainPrefab);
+        }
 
-            Container.BindService<ISceneLoader, SceneLoader>();
-            Container.BindService<IAssets, AssetProvider>();
-
-            Container.BindService<IMainMenuService, MainMenuService>();
+        private void BindServices()
+        {
+            Container.BindService<ICoroutineRunner, CoroutineRunner>(_coroutineRunner);
 
             Container.BindService<IAudioService, AudioService>(_audioService);
 
-            Container.BindService<IInputService, InputService>(_inputService);
+            Container.BindService<ISerializeService, JsonSerializeService>();
+            Container.BindService<IGameProgressService, GameProgressService>();
 
-            Container.BindService<ISpawnPointService, SpawnPointService>();
-            Container.BindService<IGameResetService, GameResetService>();
+            Container.BindService<ISceneLoader, SceneLoader>();
+            Container.BindService<IAssetsLoader, AssetLoaderProvider>();
 
-            Container.Bind<Game>().AsSingle().NonLazy();
+            Container.BindService<IGameConfigService, GameConfigService>();
+        }
+
+        private void BindView()
+        {
+            Container.BindService<IAssetFactory, AssetFactory>();
+
+            Container
+                .Bind<IViewFactory>()
+                .To<ViewFactory>()
+                .AsSingle()
+                .WithArguments(_popupCanvas)
+                .NonLazy();
+        }
+
+        private void BindStateMachine()
+        {
+            Container.BindInterfacesTo<BootstrapInstaller>().FromInstance(this).AsSingle().NonLazy();
+
+            Container.BindStateMachine<GameStateMachine>()
+                .BindState<BootstrapState>()
+                .BindState<LoadProgressState>()
+                .BindState<LoadMenuState>()
+                .BindState<MainMenuState>()
+                .BindState<LoadLevelState>()
+                .BindState<GameLoopState>();
         }
 
         public void Initialize()
         {
-            Debug.Log("BootstrapInstaller.Initialize()");
+            Debug.Log("Bootstrap Installer Initialized");
 
-            Container.Resolve<Game>().StateMachine.Enter<BootstrapState>();
+            Container.Resolve<IGameStateMachine>().Enter<BootstrapState>();
         }
     }
 }

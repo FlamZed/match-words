@@ -12,7 +12,7 @@ namespace Infrastructure.Services.Audio
         [SerializeField] private AudioSource _oneShotSource;
         [SerializeField] private AudioSource _backSource;
 
-        [Inject] private IAssets _assets;
+        [Inject] private IAssetsLoader _assetsLoader;
 
         public void PlayOneShot(AudioClipShot clip) =>
             PlayOneShot(ChoseShotClip(clip));
@@ -36,18 +36,18 @@ namespace Infrastructure.Services.Audio
         private AudioClip ChoseShotClip(AudioClipShot clip) =>
             clip switch
             {
-                AudioClipShot.Kick => _assets.Load<AudioClip>(AssetPath.KickClip),
-                AudioClipShot.Tap => _assets.Load<AudioClip>(AssetPath.TapClip),
-                AudioClipShot.Win => _assets.Load<AudioClip>(AssetPath.WinClip),
-                AudioClipShot.Lose => _assets.Load<AudioClip>(AssetPath.LoseClip),
+                AudioClipShot.Kick => _assetsLoader.Load<AudioClip>(AssetPath.KickClip),
+                AudioClipShot.Tap => _assetsLoader.Load<AudioClip>(AssetPath.TapClip),
+                AudioClipShot.Win => _assetsLoader.Load<AudioClip>(AssetPath.WinClip),
+                AudioClipShot.Lose => _assetsLoader.Load<AudioClip>(AssetPath.LoseClip),
                 _ => throw new ArgumentOutOfRangeException()
             };
 
         private AudioClip ChoseClip(BackgroundClip clip) =>
             clip switch
             {
-                BackgroundClip.Menu => _assets.Load<AudioClip>(AssetPath.BackgroundMenuClip),
-                BackgroundClip.Game => _assets.Load<AudioClip>(AssetPath.BackgroundClip),
+                BackgroundClip.Menu => _assetsLoader.Load<AudioClip>(AssetPath.BackgroundMenuClip),
+                BackgroundClip.Game => _assetsLoader.Load<AudioClip>(AssetPath.BackgroundClip),
                 _ => throw new ArgumentOutOfRangeException()
             };
     }

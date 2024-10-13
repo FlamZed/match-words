@@ -1,0 +1,169 @@
+{
+  "LevelWords": [
+    "muscat",
+    "angina",
+    "desert"
+  ],
+  "Dictionary": [
+    {
+      "Word": "act",
+      "Description": "A particular thing that somebody does",
+      "Category": "None"
+    },
+    {
+      "Word": "cam",
+      "Description": "A projection on a rotating part in machinery, designed to make sliding contact with another part while rotating and impart reciprocal or variable motion to it",
+      "Category": "Mathphysics"
+    },
+    {
+      "Word": "cast",
+      "Description": "All the people who act in a play or film",
+      "Category": "VisualArt"
+    },
+    {
+      "Word": "cat",
+      "Description": "A small domesticated carnivorous mammal with soft fur, a short snout, and retractable claws; it is widely kept as a pet or for catching mice",
+      "Category": "Creature"
+    },
+    {
+      "Word": "cut",
+      "Description": "A wound caused by something sharp",
+      "Category": "None"
+    },
+    {
+      "Word": "mast",
+      "Description": "A tall upright post, spar, or other structure on a ship or boat, in sailing vessels generally carrying a sail or sails",
+      "Category": "Tool"
+    },
+    {
+      "Word": "mat",
+      "Description": "A piece of coarse material placed on a floor for people to wipe their feet on",
+      "Category": "Tool"
+    },
+    {
+      "Word": "scam",
+      "Description": "A dishonest scheme to gain money or possessions from someone fraudulently, especially a complex or prolonged one",
+      "Category": "None"
+    },
+    {
+      "Word": "sum",
+      "Description": "A particular amount of money",
+      "Category": "None"
+    },
+    {
+      "Word": "gain",
+      "Description": "An increase in the amount of something, especially in wealth or weight",
+      "Category": "Mathphysics"
+    },
+    {
+      "Word": "gin",
+      "Description": "A clear alcoholic spirit distilled from grain or malt and flavoured with juniper berries",
+      "Category": "Plant"
+    },
+    {
+      "Word": "inn",
+      "Description": "A pub, typically one in the country, in some cases providing accommodation",
+      "Category": "Society"
+    },
+    {
+      "Word": "naan",
+      "Description": "A type of flat bread found in the cuisines (= cooking styles) of many parts of Asia",
+      "Category": "Gastronomy"
+    },
+    {
+      "Word": "ego",
+      "Description": "A person's sense of self-esteem or self-importance",
+      "Category": "Philosophy"
+    },
+    {
+      "Word": "egoist",
+      "Description": "A person who is preoccupied with his or her own interests; a selfish person",
+      "Category": "Society"
+    },
+    {
+      "Word": "go",
+      "Description": "Abstract strategy board game for two players in which the aim is to capture more territory than the opponent by fencing off empty space invented in China ",
+      "Category": "Sport"
+    },
+    {
+      "Word": "set",
+      "Description": "A group of similar things that belong together in some way",
+      "Category": "None"
+    },
+    {
+      "Word": "site",
+      "Description": "An area of ground on which a town, building, or monument is constructed",
+      "Category": "Geography"
+    },
+    {
+      "Word": "test",
+      "Description": "A procedure intended to establish the quality, performance, or reliability of something, especially before it is taken into widespread use",
+      "Category": "None"
+    },
+    {
+      "Word": "tie",
+      "Description": "A long, narrow piece of cloth worn around the neck, especially by men, with a knot in front",
+      "Category": "Textile"
+    },
+    {
+      "Word": "tit",
+      "Description": "A small songbird that searches acrobatically for insects among foliage and branches",
+      "Category": "Creature"
+    },
+    {
+      "Word": "toe",
+      "Description": "Any of the five digits at the end of the human foot",
+      "Category": "Physiology"
+    },
+    {
+      "Word": "tot",
+      "Description": "A young child",
+      "Category": "None"
+    },
+    {
+      "Word": "deer",
+      "Description": "A hoofed grazing or browsing animal, with branched bony antlers that are shed annually and typically borne only by the male",
+      "Category": "Creature"
+    },
+    {
+      "Word": "red",
+      "Description": "Of a colour at the end of the spectrum next to orange and opposite violet, as of blood, fire, or rubies",
+      "Category": "None"
+    },
+    {
+      "Word": "reed",
+      "Description": "A tall, slender-leaved plant of the grass family, which grows in water or on marshy ground",
+      "Category": "Plant"
+    },
+    {
+      "Word": "reset",
+      "Description": "Set again or differently",
+      "Category": "None"
+    },
+    {
+      "Word": "rest",
+      "Description": "Cease work or movement in order to relax, sleep, or recover strength",
+      "Category": "None"
+    },
+    {
+      "Word": "seed",
+      "Description": "The unit of reproduction of a flowering plant, capable of developing into another such plant",
+      "Category": "Plant"
+    },
+    {
+      "Word": "seer",
+      "Description": "A person of supposed supernatural insight who sees visions of the future",
+      "Category": "Religion"
+    },
+    {
+      "Word": "set",
+      "Description": "A group of similar things that belong together in some way",
+      "Category": "None"
+    },
+    {
+      "Word": "tree",
+      "Description": "A woody perennial plant, typically having a single stem or trunk growing to a considerable height and bearing lateral branches at some distance from the ground",
+      "Category": "Plant"
+    }
+  ]
+}
