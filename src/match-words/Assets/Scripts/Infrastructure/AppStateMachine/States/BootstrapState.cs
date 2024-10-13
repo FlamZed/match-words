@@ -1,4 +1,5 @@
-﻿using UnityEngine.SceneManagement;
+﻿using Infrastructure.AppStateMachine.Interfaces;
+using UnityEngine.SceneManagement;
 
 namespace Infrastructure.AppStateMachine.States
 {

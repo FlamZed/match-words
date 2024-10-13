@@ -1,4 +1,5 @@
 ﻿using Feature.LoadingCurtain;
+using Infrastructure.AppStateMachine.Interfaces;
 
 namespace Infrastructure.AppStateMachine.States
 {

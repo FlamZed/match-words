@@ -1,4 +1,6 @@
-﻿namespace Infrastructure.AppStateMachine
+﻿using Infrastructure.AppStateMachine.Interfaces;
+
+namespace Infrastructure.AppStateMachine
 {
     public class StateMachineMover : IStateMachineMover
     {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Infrastructure.Utility;
 using Newtonsoft.Json;
 
 namespace Infrastructure.Data.Type
@@ -23,5 +24,7 @@ namespace Infrastructure.Data.Type
         [JsonProperty] public string Word { get; set; }
         [JsonProperty] public string Description { get; set; }
         [JsonProperty] public string Category { get; set; }
+
+        [JsonIgnore] public string HiddenWord => Word.HideWord();
     }
 }

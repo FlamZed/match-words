@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using Infrastructure.AssetManagement;
+using Infrastructure.AssetManagement.Data;
+using Infrastructure.AssetManagement.Loader;
 using Infrastructure.Data.Type;
 using Infrastructure.Serialization;
 using UnityEngine;

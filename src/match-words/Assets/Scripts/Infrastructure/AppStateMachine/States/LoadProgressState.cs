@@ -1,4 +1,6 @@
-﻿using Infrastructure.Data;
+﻿using Feature.Wallet;
+using Infrastructure.AppStateMachine.Interfaces;
+using Infrastructure.Data;
 using Infrastructure.Progress;
 using UnityEngine;
 
@@ -9,12 +11,15 @@ namespace Infrastructure.AppStateMachine.States
         private readonly IStateMachineMover _gameStateMachine;
         private readonly IGameProgressService _gameProgressService;
         private readonly IGameConfigService _gameConfigService;
+        private readonly IWalletService _walletService;
 
         public LoadProgressState(
             IStateMachineMover gameStateMachine,
             IGameProgressService gameProgressService,
-            IGameConfigService gameConfigService)
+            IGameConfigService gameConfigService,
+            IWalletService walletService)
         {
+            _walletService = walletService;
             _gameConfigService = gameConfigService;
             _gameStateMachine = gameStateMachine;
             _gameProgressService = gameProgressService;
@@ -24,8 +29,12 @@ namespace Infrastructure.AppStateMachine.States
         {
             Debug.Log("Load Progress State");
 
-            _gameProgressService.LoadProgress();
             _gameConfigService.Load();
+            _gameProgressService.LoadProgress();
+
+            _walletService.Initialize(_gameProgressService.GetCoins());
+
+            _gameProgressService.RestoreWordsData(_gameConfigService.WordDictionary);
 
             _gameStateMachine.Enter<LoadMenuState>();
         }

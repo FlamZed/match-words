@@ -220,6 +220,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8644772239680340876}
   - component: {fileID: 4016870529911113195}
+  - component: {fileID: 5200936188557766611}
   m_Layer: 5
   m_Name: ValueHolder
   m_TagString: Untagged
@@ -256,6 +257,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7620663872994390552}
   m_CullTransparentMesh: 1
+--- !u!114 &5200936188557766611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7620663872994390552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 581fb42787d14cbbb043663cd76e1217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _coinsText: {fileID: 5112968346864415760}
 --- !u!1 &8340646577981116880
 GameObject:
   m_ObjectHideFlags: 0

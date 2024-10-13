@@ -1,4 +1,4 @@
-﻿namespace Infrastructure
+﻿namespace Infrastructure.AppStateMachine.Interfaces
 {
     public interface IExitableState
     {

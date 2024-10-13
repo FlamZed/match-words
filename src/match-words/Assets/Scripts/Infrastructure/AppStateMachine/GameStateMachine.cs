@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Infrastructure.AppStateMachine.Interfaces;
 using Zenject;
 
 namespace Infrastructure.AppStateMachine
@@ -12,10 +13,10 @@ namespace Infrastructure.AppStateMachine
 
         private readonly DiContainer _diContainer;
 
-        public GameStateMachine(IStateMachineMover stateMachineMover, IEnumerable<IState> states)
+        public GameStateMachine(IStateMachineMover stateMachineMover, IEnumerable<IExitableState> states)
         {
             stateMachineMover.SetStateMachine(this);
-            _states = states.ToDictionary(x => x.GetType(), x => x as IExitableState);
+            _states = states.ToDictionary(x => x.GetType(), x => x);
         }
 
         public void Enter<TState>() where TState : class, IState

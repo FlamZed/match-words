@@ -1,33 +1,56 @@
 using Feature.LoadingCurtain;
+using Feature.PrintMachine;
+using Infrastructure.AppStateMachine.Interfaces;
+using Infrastructure.GameManager;
+using Infrastructure.Progress;
 
 namespace Infrastructure.AppStateMachine.States
 {
-    public class LoadLevelState : IState
+    public class LoadLevelState : IPayloadedState<string>
     {
-        private const string SceneName = "LevelMenu";
+        private const string SceneName = "Game";
 
         private readonly IStateMachineMover _stateMachineMover;
         private readonly ISceneLoader _sceneLoader;
         private readonly ILoadingCurtain _curtain;
+        private readonly IGameManager _gameManager;
+        private readonly IGameProgressService _progressService;
+
+        private string _levelName;
 
         public LoadLevelState(
             IStateMachineMover stateMachineMover,
             ISceneLoader sceneLoader,
-            ILoadingCurtain curtain)
+            ILoadingCurtain curtain,
+            IGameManager gameManager,
+            IGameProgressService progressService)
         {
+            _progressService = progressService;
+            _gameManager = gameManager;
             _stateMachineMover = stateMachineMover;
             _sceneLoader = sceneLoader;
             _curtain = curtain;
         }
 
-        public void Enter()
+        public void Enter(string levelName)
         {
+            _levelName = levelName;
             _curtain.Show();
 
             _sceneLoader.Load(SceneName, onLoaded: OnLoaded);
         }
 
-        private void OnLoaded() => _stateMachineMover.Enter<GameLoopState>();
+        private async void OnLoaded()
+        {
+            var printManager = await _gameManager.AwaitServiceLoading<PrintMachineController>();
+
+            var progressLevel = _progressService.GetProgress();
+            var selectedLevel = progressLevel.WordsProgress[_levelName];
+
+            printManager.Initialize(_levelName, selectedLevel);
+
+            _stateMachineMover.Enter<GameLoopState, string>(_levelName);
+        }
 
         public void Exit() => _curtain.Hide();
     }

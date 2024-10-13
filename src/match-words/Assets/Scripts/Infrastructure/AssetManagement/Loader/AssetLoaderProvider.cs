@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Infrastructure.AssetManagement
+namespace Infrastructure.AssetManagement.Loader
 {
     public class AssetLoaderProvider : IAssetsLoader
     {

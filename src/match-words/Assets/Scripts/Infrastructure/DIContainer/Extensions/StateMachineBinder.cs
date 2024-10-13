@@ -1,4 +1,5 @@
 ﻿using Infrastructure.AppStateMachine;
+using Infrastructure.AppStateMachine.Interfaces;
 using Zenject;
 
 namespace Infrastructure.DIContainer.Extensions
