@@ -6,6 +6,7 @@ using Infrastructure.AppStateMachine.Interfaces;
 using Infrastructure.Data.Type;
 using Infrastructure.GameManager;
 using Infrastructure.Progress;
+using UnityEngine;
 
 namespace Infrastructure.AppStateMachine.States
 {
@@ -20,7 +21,7 @@ namespace Infrastructure.AppStateMachine.States
 
         private PrintMachineController _printManager;
 
-        private CancellationToken _cancellationToken;
+        private CancellationTokenSource _cancellationToken;
 
         public GameLoopState(
             IStateMachineMover stateMachineMover,
@@ -36,7 +37,7 @@ namespace Infrastructure.AppStateMachine.States
 
         public async void Enter(string levelName)
         {
-            _cancellationToken = new CancellationToken();
+            _cancellationToken = new CancellationTokenSource();
 
             _levelName = levelName;
 
@@ -52,8 +53,11 @@ namespace Infrastructure.AppStateMachine.States
 
             SetWordsPregress();
 
-            StartLevelTimer(levelSeconds, _cancellationToken).Forget();
+            StartLevelTimer(levelSeconds, _cancellationToken.Token).Forget();
         }
+
+        public void Exit() =>
+            _cancellationToken.Cancel();
 
         private void LoadLevelScene() =>
             _stateMachineMover.Enter<LoadMenuState>();
@@ -78,9 +82,6 @@ namespace Infrastructure.AppStateMachine.States
             _printManager.UpdateWordCounter(totalWords, unlockedWords);
         }
 
-        public void Exit() =>
-            _cancellationToken.ThrowIfCancellationRequested();
-
         private async UniTask StartLevelTimer(int initTime, CancellationToken cancellationToken)
         {
             var time = initTime;
@@ -94,6 +95,8 @@ namespace Infrastructure.AppStateMachine.States
 
                 await UniTask.Delay(1000, cancellationToken: cancellationToken);
             }
+
+            Debug.LogWarning("Timer stopped");
         }
     }
 }
