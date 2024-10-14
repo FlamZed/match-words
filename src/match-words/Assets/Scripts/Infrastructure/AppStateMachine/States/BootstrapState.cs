@@ -22,7 +22,7 @@ namespace Infrastructure.AppStateMachine.States
         public void Enter()
         {
             if (SceneManager.GetActiveScene().name != Initial)
-                _sceneLoader.Load(Initial, onLoaded: LoadEnterState);
+                _sceneLoader.LoadLocalScene(Initial, onLoaded: LoadEnterState);
             else
                 LoadEnterState();
         }

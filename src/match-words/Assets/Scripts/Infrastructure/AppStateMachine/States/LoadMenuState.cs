@@ -26,16 +26,18 @@ namespace Infrastructure.AppStateMachine.States
             _stateMachineMover = stateMachineMover;
         }
 
-        public void Enter()
+        public async void Enter()
         {
             _curtain.Show();
-            _sceneLoader.Load(SceneName, onLoaded: OnLoaded);
+
+            await _sceneLoader.LoadSceneAsync(SceneName);
 
             _audioService.PlayBackground(BackgroundClip.Menu);
+
+            _stateMachineMover.Enter<MainMenuState>();
         }
 
-        private void OnLoaded() => _stateMachineMover.Enter<MainMenuState>();
-
-        public void Exit() => _curtain.Hide();
+        public void Exit() =>
+            _curtain.Hide();
     }
 }

@@ -48,7 +48,7 @@ namespace Infrastructure.DIContainer.ProjectInstallers
             Container.BindService<ISerializeService, JsonSerializeService>();
             Container.BindService<IGameProgressService, GameProgressService>();
 
-            Container.BindService<ISceneLoader, SceneLoader>();
+            Container.BindService<ISceneLoader, SceneProviderService>();
             Container.BindService<IAssetsLoader, AssetLoaderProvider>();
 
             Container.BindService<IGameConfigService, GameConfigService>();

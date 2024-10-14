@@ -37,14 +37,16 @@ namespace Infrastructure.AppStateMachine.States
             _curtain = curtain;
         }
 
-        public void Enter(string levelName)
+        public async void Enter(string levelName)
         {
             _levelName = levelName;
             _curtain.Show();
 
             _audioService.PlayBackground(BackgroundClip.Game);
 
-            _sceneLoader.Load(SceneName, onLoaded: OnLoaded);
+            await _sceneLoader.LoadSceneAsync(SceneName);
+
+            OnLoaded();
         }
 
         private async void OnLoaded()

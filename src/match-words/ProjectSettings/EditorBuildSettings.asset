@@ -7,12 +7,6 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/Boot.unity
-    guid: a3dea65ff126ec54c88a5dfa73594d50
-  - enabled: 1
-    path: Assets/Scenes/LevelMenu.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
-    path: Assets/Scenes/Game.unity
-    guid: 6e7a10ab86fc58747b5afda32ef876c6
+    guid: f6f2f07cc5cad64498dbde918c43f766
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 02d0db1e51a213044b2a2c046edf6ae5, type: 2}
